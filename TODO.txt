@@ -1,0 +1,67 @@
+TICTACTOE 
+
+Backend logic 
+- only 2 players 
+- Each player takes turns 
+- Gameboard class handles game state 
+-- Which squares are empty vs played 
+-- Which player played each played square
+-- Check if winning combination present on board 
+- Player class stores player state
+-- Player name, player victories, player defeats
+
+- Composition: 
+-- In composition, the contained -- composed -- objects are tied directly to the container. Eg Car & Engine. 
+- Aggregation
+-- Unlike composition, the the lifetime of the contained objects does not depend on the lifetime of the container. Eg Car & Passengers
+
+Composition: The container owns the contained objects, and their lifecycles are tightly linked.
+Aggregation: The container does not own the contained objects; they can exist independently.
+
+class Gameboard 
+  def initialize(first_player, second_player, new_game = "0")
+    if new_game == "1"
+      reset_gameboard
+    else 
+      // Uses Aggregation 
+      @player_1 = first_player
+      @player_2 = second_player
+    end 
+  end
+
+  available_squares = [1,2,3,4,5,6,7,8,9]
+  unavailable_squares = []
+
+  def display_board
+    puts " #{@board[0]} | #{@board[1]} | #{@board[2]} "
+    puts "-----------"
+    puts " #{@board[3]} | #{@board[4]} | #{@board[5]} "
+    puts "-----------"
+    puts " #{@board[6]} | #{@board[7]} | #{@board[8]} "
+  end
+
+  def play_square(player, square)
+    return error unless square_available?(square)
+  end
+
+  private 
+
+  def reset_gameboard 
+    ??
+  end 
+
+  def square_available?(square)
+    available_squares.includes?(square)
+  end
+
+end 
+
+class Player 
+  def initialize(name)
+    @name = name 
+  end
+end
+
+richard = Player.new("Richard")
+todd = Player.new("Todd")
+gameboard = Gameboard.new(richard, todd)
